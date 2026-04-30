@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#0D1F3C">
+<title>Fonseca & Asoc. — Estudio Jurídico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & ROOT ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --azul:       #0D1F3C;
+  --azul-mid:   #152B54;
+  --azul-claro: #1E3A6E;
+  --dorado:     #C9A84C;
+  --dorado-h:   #E2BB6A;
+  --negro:      #080C14;
+  --blanco:     #F8F7F4;
+  --gris:       #EEECE8;
+  --texto:      #6B7280;
+  --borde:      rgba(201,168,76,0.2);
+  --borde-azul: rgba(255,255,255,0.08);
+  --sombra:     0 4px 24px rgba(0,0,0,0.12);
+
+  /* Spacing scale */
+  --s1: clamp(0.5rem, 2vw, 1rem);
+  --s2: clamp(1rem, 4vw, 2rem);
+  --s3: clamp(1.5rem, 5vw, 3rem);
+  --s4: clamp(2rem, 6vw, 5rem);
+
+  /* Type scale */
+  --t-xs:  clamp(0.6rem, 1.8vw, 0.72rem);
+  --t-sm:  clamp(0.78rem, 2.2vw, 0.9rem);
+  --t-md:  clamp(0.88rem, 2.5vw, 1rem);
+  --t-hero: clamp(2.4rem, 8vw, 4.4rem);
+  --t-h2:  clamp(1.8rem, 5vw, 3rem);
+  --t-h3:  clamp(1.3rem, 3.5vw, 2rem);
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--blanco);
+  color: var(--azul);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--negro); }
+::-webkit-scrollbar-thumb { background: var(--dorado); }
+
+/* ─── TOPBAR (desktop only) ────────────────────────────── */
+.topbar {
+  background: var(--negro);
+  padding: 0.45rem clamp(1.5rem, 5vw, 5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.4px;
+  border-bottom: 1px solid var(--borde-azul);
+}
+.topbar a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color .2s; }
+.topbar a:hover { color: var(--dorado); }
+.topbar-group { display: flex; gap: 1.8rem; align-items: center; flex-wrap: wrap; }
+.topbar-item { display: flex; align-items: center; gap: 5px; }
+.topbar-item svg { width: 10px; height: 10px; stroke: var(--dorado); flex-shrink: 0; }
+
+@media (max-width: 768px) { .topbar { display: none; } }
+
+/* ─── NAV ───────────────────────────────────────────────── */
+nav {
+  position: sticky; top: 0; z-index: 300;
+  background: var(--azul);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(1.2rem, 5vw, 5rem);
+  height: 68px;
+  border-bottom: 1px solid var(--borde);
+  transition: box-shadow .3s;
+}
+nav.scrolled { box-shadow: 0 6px 40px rgba(0,0,0,0.5); }
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; flex-shrink: 0;
+}
+.logo-icon {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border: 1.5px solid var(--dorado);
+  display: flex; align-items: center; justify-content: center;
+}
+.logo-icon svg { width: 18px; height: 18px; stroke: var(--dorado); }
+.logo-img { height: 48px; width: auto; object-fit: contain; }
+.logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+.logo-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  font-weight: 700; color: var(--blanco); letter-spacing: 0.3px;
+}
+.logo-name span { color: var(--dorado); }
+.logo-sub {
+  font-size: 0.55rem; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 2px;
+}
+
+/* Desktop nav links */
+.nav-links {
+  display: flex; align-items: center; list-style: none;
+  gap: 0;
+}
+.nav-links li a {
+  display: block; color: rgba(255,255,255,0.55);
+  text-decoration: none; font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 0 0.9rem; height: 68px; line-height: 68px;
+  position: relative; transition: color .2s;
+}
+.nav-links li a::after {
+  content: ''; position: absolute; bottom: 0; left: 0.9rem; right: 0.9rem;
+  height: 2px; background: var(--dorado);
+  transform: scaleX(0); transform-origin: center; transition: transform .25s;
+}
+.nav-links li a:hover, .nav-links li a.active { color: var(--blanco); }
+.nav-links li a:hover::after, .nav-links li a.active::after { transform: scaleX(1); }
+
+.nav-cta {
+  margin-left: 0.8rem;
+  display: inline-block !important;
+  background: var(--dorado) !important;
+  color: var(--negro) !important;
+  font-size: 0.65rem !important; font-weight: 700 !important;
+  letter-spacing: 2px !important; text-transform: uppercase !important;
+  padding: 0.5rem 1.2rem !important;
+  height: auto !important; line-height: 1.5 !important;
+  transition: background .2s !important;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--dorado-h) !important; }
+
+/* Hamburger */
+.nav-toggle {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 8px;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--blanco); transition: all .3s; border-radius: 2px; }
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile drawer */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none; position: fixed;
+    top: 68px; left: 0; right: 0; bottom: 0;
+    background: var(--azul);
+    flex-direction: column; align-items: stretch;
+    padding: 1rem 0; overflow-y: auto;
+    border-top: 1px solid var(--borde); z-index: 299;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li a {
+    height: auto; line-height: 1;
+    padding: 1rem 1.8rem; font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-links li a::after { display: none; }
+  .nav-cta {
+    margin: 1.2rem 1.8rem 0 !important;
+    text-align: center !important;
+    padding: 0.8rem 1.2rem !important;
+    font-size: 0.78rem !important;
+  }
+  .nav-toggle { display: flex; }
+}
+
+/* ─── BUTTONS ───────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--dorado); color: var(--negro);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.68rem, 2vw, 0.75rem); font-weight: 700;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  padding: clamp(0.7rem, 2vw, 0.85rem) clamp(1.2rem, 3vw, 2rem);
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background .2s, transform .15s;
+  white-space: nowrap;
+}
+.btn-primary:hover { background: var(--dorado-h); transform: translateY(-2px); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(201,168,76,0.4); color: rgba(255,255,255,0.7);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.68rem, 2vw, 0.75rem); font-weight: 500;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  padding: clamp(0.7rem, 2vw, 0.85rem) clamp(1.2rem, 3vw, 2rem);
+  text-decoration: none; cursor: pointer;
+  transition: border-color .2s, color .2s;
+  white-space: nowrap;
+}
+.btn-secondary:hover { border-color: var(--dorado); color: var(--dorado); }
+
+/* ─── SECTION COMMON ────────────────────────────────────── */
+section { padding: var(--s4) clamp(1.2rem, 5vw, 5rem); }
+
+.section-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: var(--t-xs); font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--dorado); margin-bottom: 0.5rem;
+}
+.section-label::before { content: ''; width: 22px; height: 1px; background: var(--dorado); flex-shrink: 0; }
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--t-h2); font-weight: 700;
+  line-height: 1.05; letter-spacing: -0.3px;
+}
+.section-title em { font-style: italic; color: var(--dorado); }
+
+/* ─── REVEAL ─────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── HERO ───────────────────────────────────────────────── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+
+.hero {
+  position: relative;
+  min-height: clamp(480px, 80vh, 720px);
+  background: var(--azul);
+  display: flex; flex-direction: column; justify-content: center;
+  overflow: hidden;
+  padding: clamp(3rem, 8vw, 5rem) clamp(1.2rem, 5vw, 5rem);
+}
+
+/* Background photo layer */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=80');
+  background-size: cover; background-position: center 30%;
+  opacity: 0.12;
+}
+.hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--azul) 40%, transparent);
+}
+
+/* Diagonal accent — hidden on small */
+.hero-deco {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 42%;
+  background: linear-gradient(160deg, transparent 0%, rgba(201,168,76,0.04) 100%);
+  border-left: 1px solid var(--borde);
+  clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+  pointer-events: none; z-index: 1;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 600px; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: var(--t-xs); font-weight: 700; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--dorado);
+  margin-bottom: 1.4rem;
+  opacity: 0; animation: fadeUp .8s ease .1s forwards;
+}
+.hero-tag-line { width: 28px; height: 1px; background: var(--dorado); }
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--t-hero); font-weight: 900;
+  color: var(--blanco); line-height: 1.0; letter-spacing: -1px;
+  margin-bottom: 1.2rem;
+  opacity: 0; animation: fadeUp .9s ease .25s forwards;
+}
+.hero-title em { font-style: italic; color: var(--dorado); }
+
+.hero-desc {
+  color: rgba(255,255,255,0.52);
+  font-size: clamp(0.88rem, 2.5vw, 0.95rem); font-weight: 300;
+  line-height: 1.85; max-width: 480px;
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp .9s ease .4s forwards;
+}
+
+.hero-btns {
+  display: flex; gap: 0.8rem; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp .9s ease .55s forwards;
+}
+
+/* ─── INFO STRIP ─────────────────────────────────────────── */
+.info-strip {
+  background: var(--negro);
+  border-top: 1px solid rgba(201,168,76,0.15);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 900px) { .info-strip { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 500px) { .info-strip { grid-template-columns: 1fr; } }
+
+.info-strip-item {
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 1.1rem clamp(1rem, 3vw, 2rem);
+  border-right: 1px solid var(--borde-azul);
+  border-bottom: 1px solid var(--borde-azul);
+  text-decoration: none; transition: background .2s;
+  min-width: 0;
+}
+.info-strip-item:hover { background: rgba(201,168,76,0.05); }
+
+.info-strip-icon {
+  width: 32px; height: 32px; flex-shrink: 0;
+  border: 1px solid var(--borde);
+  display: flex; align-items: center; justify-content: center;
+}
+.info-strip-icon svg { width: 13px; height: 13px; stroke: var(--dorado); }
+.info-strip-label { font-size: 0.54rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 2px; }
+.info-strip-value { font-size: clamp(0.75rem, 2.2vw, 0.82rem); font-weight: 500; color: rgba(255,255,255,0.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ─── SERVICIOS ──────────────────────────────────────────── */
+#servicios { background: var(--azul); }
+#servicios .section-title { color: var(--blanco); }
+
+.servicios-intro {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  gap: 1.5rem; flex-wrap: wrap;
+}
+.servicios-intro p {
+  color: rgba(255,255,255,0.42);
+  font-size: var(--t-sm); line-height: 1.8; font-weight: 300;
+  max-width: 360px; margin-top: 0.8rem;
+}
+
+.servicios-list { display: flex; flex-direction: column; }
+
+.servicio-row {
+  display: flex; align-items: center; gap: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: clamp(1.2rem, 3vw, 1.8rem) 0;
+  transition: padding-left .25s, background .2s;
+  cursor: default; position: relative;
+}
+.servicio-row:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+.servicio-row::before {
+  content: ''; position: absolute;
+  left: clamp(-1.2rem, -5vw, -5rem); right: clamp(-1.2rem, -5vw, -5rem);
+  top: 0; bottom: 0;
+  background: rgba(201,168,76,0.04); opacity: 0; transition: opacity .2s;
+}
+.servicio-row:hover::before { opacity: 1; }
+@media (hover: hover) { .servicio-row:hover { padding-left: 0.8rem; } }
+
+.serv-num {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 0.7rem;
+  color: rgba(201,168,76,0.45); width: 24px; flex-shrink: 0;
+}
+.serv-icon {
+  width: 40px; height: 40px; flex-shrink: 0;
+  border: 1px solid rgba(201,168,76,0.2);
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .2s, background .2s;
+}
+.servicio-row:hover .serv-icon { border-color: var(--dorado); background: rgba(201,168,76,0.08); }
+.serv-icon svg { width: 16px; height: 16px; stroke: var(--dorado); }
+
+.serv-content { flex: 1; min-width: 0; }
+.serv-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.95rem, 2.8vw, 1.15rem); font-weight: 700;
+  color: var(--blanco); margin-bottom: 0.2rem;
+  transition: color .2s;
+}
+.servicio-row:hover .serv-name { color: var(--dorado); }
+.serv-text {
+  font-size: clamp(0.72rem, 2vw, 0.82rem);
+  color: rgba(255,255,255,0.38); line-height: 1.55; font-weight: 300;
+}
+
+.serv-arrow {
+  width: 32px; height: 32px; flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.serv-arrow svg { width: 13px; height: 13px; stroke: rgba(255,255,255,0.25); transition: stroke .2s; }
+.servicio-row:hover .serv-arrow { border-color: var(--dorado); background: var(--dorado); }
+.servicio-row:hover .serv-arrow svg { stroke: var(--negro); }
+
+/* ─── MISION / CONOCENOS ────────────────────────────────── */
+#mision { background: var(--blanco); }
+
+.mision-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+}
+@media (max-width: 768px) {
+  .mision-grid { grid-template-columns: 1fr; }
+  .mision-visual-col { order: -1; }
+}
+
+.mision-quote {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(0.95rem, 2.8vw, 1.15rem); font-weight: 400;
+  color: var(--azul); line-height: 1.75;
+  border-left: 3px solid var(--dorado); padding-left: 1.3rem;
+  margin: 1.5rem 0;
+}
+.mision-desc {
+  font-size: var(--t-sm); color: var(--texto);
+  line-height: 1.9; font-weight: 300; margin-bottom: 1rem;
+}
+
+.stats-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  margin-top: 1.8rem;
+  border: 1px solid rgba(0,0,0,0.09);
+}
+.stat-item {
+  padding: 1.2rem 0.8rem; text-align: center;
+  border-right: 1px solid rgba(0,0,0,0.09);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700;
+  color: var(--dorado); line-height: 1;
+}
+.stat-label {
+  font-size: 0.58rem; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(0,0,0,0.32); margin-top: 4px;
+}
+
+/* Team cards */
+.team-cards { display: flex; flex-direction: column; gap: 1.2rem; }
+
+.team-card {
+  display: flex; align-items: center; gap: 1rem;
+  background: var(--gris); padding: 1.2rem;
+  border: 1px solid rgba(0,0,0,0.07);
+}
+.team-photo {
+  width: 80px; height: 100px; flex-shrink: 0;
+  overflow: hidden; border: 2px solid var(--dorado);
+}
+.team-photo img { width: 100%; height: 100%; object-fit: cover; }
+.team-photo-placeholder {
+  width: 100%; height: 100%;
+  background: var(--azul);
+  display: flex; align-items: center; justify-content: center;
+}
+.team-photo-placeholder svg { width: 28px; height: 28px; stroke: var(--dorado); }
+.team-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem); font-weight: 700; color: var(--azul);
+}
+.team-role {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--dorado); margin: 3px 0 7px;
+}
+.team-bio { font-size: 0.8rem; color: var(--texto); line-height: 1.55; }
+
+/* ─── BANNER ─────────────────────────────────────────────── */
+.banner-consulta {
+  background: var(--negro); position: relative; overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 700px) {
+  .banner-consulta { grid-template-columns: 1fr; }
+  .banner-img { height: 200px; }
+}
+
+.banner-img {
+  background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80');
+  background-size: cover; background-position: center;
+  filter: brightness(0.3) saturate(0.4);
+  position: relative; min-height: 280px;
+}
+.banner-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to right, transparent 50%, var(--negro));
+}
+@media (max-width: 700px) {
+  .banner-img::after { background: linear-gradient(to bottom, transparent 40%, var(--negro)); }
+}
+
+.banner-content {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem);
+  position: relative; z-index: 2;
+}
+.banner-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-size: var(--t-xs); font-weight: 700; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--dorado); margin-bottom: 1rem;
+}
+.banner-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--dorado); }
+.banner-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 700;
+  color: var(--blanco); line-height: 1.1; margin-bottom: 1rem;
+}
+.banner-title em { font-style: italic; color: var(--dorado); }
+.banner-desc {
+  font-size: var(--t-sm); color: rgba(255,255,255,0.42);
+  line-height: 1.8; font-weight: 300; margin-bottom: 1.8rem; max-width: 380px;
+}
+.banner-btns { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.btn-wa-inline {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: rgba(255,255,255,0.45); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none;
+  transition: color .2s;
+}
+.btn-wa-inline:hover { color: #25D366; }
+.btn-wa-inline svg { flex-shrink: 0; }
+
+/* ─── CLIENTES / RESEÑAS ────────────────────────────────── */
+#clientes { background: var(--blanco); overflow: hidden; }
+
+.resenas-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: clamp(1.5rem, 4vw, 3rem); flex-wrap: wrap; gap: 1rem;
+}
+.rating-block { text-align: right; }
+.stars-row { display: flex; gap: 3px; justify-content: flex-end; margin-bottom: 4px; }
+.star { width: 12px; height: 12px; background: var(--dorado); clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+.rating-num { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; color: var(--azul); line-height: 1; }
+.rating-label { font-size: 0.65rem; color: var(--texto); margin-top: 2px; }
+
+.carousel-wrapper { overflow: hidden; position: relative; touch-action: pan-x; }
+.carousel-track {
+  display: flex; gap: clamp(0.8rem, 2vw, 1.5rem);
+  animation: slide 32s linear infinite; width: max-content;
+  cursor: grab;
+}
+.carousel-track:active { cursor: grabbing; }
+.carousel-track:hover { animation-play-state: paused; }
+
+@keyframes slide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.resena-card {
+  background: var(--blanco);
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: clamp(1.2rem, 3vw, 1.8rem);
+  width: clamp(260px, 80vw, 310px);
+  flex-shrink: 0; position: relative;
+  transition: box-shadow .25s, transform .25s;
+}
+.resena-card:hover { box-shadow: 0 10px 32px rgba(0,0,0,0.08); transform: translateY(-3px); }
+.resena-bigq {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 4rem; color: rgba(201,168,76,0.1); line-height: 0.8;
+  position: absolute; top: 0.8rem; right: 1rem; pointer-events: none;
+}
+.resena-stars { display: flex; gap: 3px; margin-bottom: 0.8rem; }
+.resena-star { width: 10px; height: 10px; background: var(--dorado); clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+.resena-text {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(0.82rem, 2.2vw, 0.93rem); color: #444;
+  line-height: 1.7; margin-bottom: 1.2rem; position: relative; z-index: 1;
+}
+.resena-meta { display: flex; align-items: center; gap: 0.8rem; }
+.resena-avatar {
+  width: 32px; height: 32px; background: var(--azul); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700; color: var(--dorado);
+}
+.resena-name { font-size: 0.8rem; font-weight: 600; color: var(--azul); }
+.resena-date { font-size: 0.62rem; color: #aaa; margin-top: 1px; }
+
+.fade-left, .fade-right {
+  position: absolute; top: 0; bottom: 0; width: clamp(40px, 8vw, 80px);
+  z-index: 2; pointer-events: none;
+}
+.fade-left { left: 0; background: linear-gradient(to right, var(--blanco), transparent); }
+.fade-right { right: 0; background: linear-gradient(to left, var(--blanco), transparent); }
+
+/* ─── OFICINAS ───────────────────────────────────────────── */
+#oficinas { background: var(--azul); }
+#oficinas .section-title { color: var(--blanco); }
+
+.oficinas-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+}
+@media (max-width: 768px) { .oficinas-grid { grid-template-columns: 1fr; } }
+
+.mapa-wrap { border: 1px solid var(--borde); overflow: hidden; }
+.mapa-wrap iframe { width: 100%; height: clamp(250px, 40vw, 380px); display: block; filter: grayscale(.6) contrast(1.1); }
+
+.info-cards { display: flex; flex-direction: column; gap: 1px; background: var(--borde-azul); border: 1px solid var(--borde-azul); }
+.info-card { background: var(--azul-mid); padding: 1.2rem 1.4rem; transition: background .2s; }
+.info-card:hover { background: var(--azul-claro); }
+.info-card-label { font-size: 0.56rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.4rem; }
+.info-card-value { font-size: var(--t-sm); color: rgba(255,255,255,0.6); line-height: 1.6; }
+.info-card-value a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color .2s; }
+.info-card-value a:hover { color: var(--dorado); }
+.info-card-value strong { color: var(--blanco); }
+
+/* ─── CONTACTO ───────────────────────────────────────────── */
+#contacto { background: var(--gris); }
+
+.contacto-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+}
+@media (max-width: 768px) { .contacto-grid { grid-template-columns: 1fr; } }
+
+.form-panel { background: var(--blanco); padding: clamp(1.5rem, 4vw, 2.4rem); border: 1px solid rgba(0,0,0,0.08); }
+.form-panel-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 3vw, 1.3rem); font-weight: 700; color: var(--azul);
+  margin-bottom: 1.4rem; padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.form-group { margin-bottom: 1rem; }
+.form-label { display: block; font-size: 0.58rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(0,0,0,0.38); margin-bottom: 0.35rem; }
+.form-input, .form-textarea, .form-select {
+  width: 100%; background: var(--gris);
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 0.75rem 0.9rem;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--azul);
+  transition: border-color .2s; outline: none; appearance: none;
+  -webkit-appearance: none; border-radius: 0;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--dorado); }
+.form-textarea { resize: vertical; min-height: 100px; }
+
+.btn-wa-submit {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: #25D366; color: var(--blanco);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  padding: 0.95rem; border: none; cursor: pointer;
+  margin-top: 0.5rem; transition: background .2s, transform .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-wa-submit:hover { background: #1fbe5a; transform: translateY(-1px); }
+.btn-wa-submit:active { transform: translateY(0); }
+
+.contacto-lateral { display: flex; flex-direction: column; gap: 1.2rem; }
+.contacto-lateral-title { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 3vw, 1.3rem); font-weight: 700; color: var(--azul); }
+.contacto-lateral-sub { font-size: var(--t-sm); color: var(--texto); line-height: 1.7; font-weight: 300; margin-top: 0.4rem; }
+
+.contact-links { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.5rem; }
+.contact-link-item {
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--blanco); border: 1px solid rgba(0,0,0,0.08);
+  text-decoration: none; color: var(--azul);
+  transition: border-color .2s, transform .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.contact-link-item:hover { border-color: var(--dorado); transform: translateX(4px); }
+.contact-link-icon { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contact-link-icon svg { width: 16px; height: 16px; }
+.contact-link-text strong { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.contact-link-text span { font-size: 0.75rem; color: var(--texto); }
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+footer {
+  background: var(--negro); border-top: 1px solid var(--borde);
+  padding: 1.8rem clamp(1.2rem, 5vw, 5rem);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1.2rem;
+}
+@media (max-width: 600px) { footer { flex-direction: column; text-align: center; } }
+
+.footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.28); }
+.footer-copy span { color: var(--dorado); }
+
+.footer-socials { display: flex; gap: 0.4rem; }
+.footer-social-btn {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--borde-azul);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.35); text-decoration: none;
+  transition: all .2s;
+}
+.footer-social-btn:hover { background: var(--dorado); border-color: var(--dorado); color: var(--negro); }
+.footer-social-btn svg { width: 13px; height: 13px; }
+
+/* ─── WHATSAPP FLOTANTE ─────────────────────────────────── */
+.wa-float {
+  position: fixed; bottom: 22px; right: 22px; z-index: 999;
+  width: clamp(48px, 13vw, 56px); height: clamp(48px, 13vw, 56px);
+  background: #25D366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 20px rgba(37,211,102,0.5);
+  text-decoration: none;
+  animation: pulseWa 2.5s infinite;
+  transition: transform .2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.wa-float:hover { transform: scale(1.1); }
+.wa-float svg { width: clamp(22px, 6vw, 28px); height: clamp(22px, 6vw, 28px); fill: white; }
+@keyframes pulseWa {
+  0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.5); }
+  50%       { box-shadow: 0 6px 30px rgba(37,211,102,0.8); }
+}
+
+/* ─── MOBILE QUICK ACTIONS (solo celular) ────────────────── */
+.mobile-quick {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  background: var(--negro);
+  border-top: 1px solid var(--borde-azul);
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 60px;
+}
+@media (max-width: 768px) { .mobile-quick { display: grid; } }
+
+.mq-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; text-decoration: none; color: rgba(255,255,255,0.5);
+  font-size: 0.52rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  transition: color .2s, background .2s; border-right: 1px solid var(--borde-azul);
+  -webkit-tap-highlight-color: transparent;
+}
+.mq-btn:last-child { border-right: none; }
+.mq-btn:hover, .mq-btn:active { background: rgba(201,168,76,0.08); color: var(--dorado); }
+.mq-btn svg { width: 18px; height: 18px; }
+.mq-btn.wa { color: #25D366; }
+.mq-btn.wa:hover { color: #25D366; }
+
+/* Espacio para la barra fija en mobile */
+@media (max-width: 768px) {
+  body { padding-bottom: 60px; }
+  .wa-float { bottom: 80px; right: 16px; width: 46px; height: 46px; }
+  .wa-float svg { width: 22px; height: 22px; }
+}
+
+/* ─── UTILIDADES EXTRA ───────────────────────────────────── */
+@media (max-width: 500px) {
+  .hero-btns { flex-direction: column; }
+  .hero-btns .btn-primary, .hero-btns .btn-secondary { justify-content: center; }
+  .stats-row { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.09); }
+  .stat-item:last-child { border-bottom: none; }
+}
+
+/* Focus visible para accesibilidad */
+:focus-visible { outline: 2px solid var(--dorado); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ─── WA FLOTANTE ──────────────────────────────────────── -->
+<a href="https://wa.me/5491131401355" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ─── TOPBAR ─────────────────────────────────────────────── -->
+<div class="topbar">
+  <div class="topbar-group">
+    <div class="topbar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 3.18 2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      <a href="tel:+5491131401355">+54 9 11 3140-1355</a>
+    </div>
+  </div>
+  <div class="topbar-group">
+    <div class="topbar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <a href="https://www.google.com.ar/maps/place/Estudio+Jur%C3%ADdico+Fonseca+Pablo+%26+Asoc." target="_blank">Zona Sur — Buenos Aires</a>
+    </div>
+    <div class="topbar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      <a href="https://www.instagram.com/fonsecaPablo_abogado" target="_blank">@fonsecaPablo_abogado</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── NAV ───────────────────────────────────────────────── -->
+<nav id="main-nav">
+  <a href="#inicio" class="nav-logo">
+    <img src="logo.png" alt="Logo Fonseca" class="logo-img"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <div class="logo-icon" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div class="logo-text">
+      <div class="logo-name">Fonseca <span>&</span> Asoc.</div>
+      <div class="logo-sub">Estudio Jurídico</div>
+    </div>
+  </a>
+
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#mision">Conocenos</a></li>
+    <li><a href="#clientes">Clientes</a></li>
+    <li><a href="#oficinas">Oficinas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#contacto" class="nav-cta">Consultanos</a></li>
+  </ul>
+
+  <button class="nav-toggle" id="nav-toggle" onclick="toggleMenu()" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ─── HERO ───────────────────────────────────────────────── -->
+<section id="inicio" style="padding:0;">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-deco"></div>
+    <div class="hero-content">
+      <div class="hero-tag"><span class="hero-tag-line"></span>Estudio Jurídico — Buenos Aires</div>
+      <h1 class="hero-title">
+        Fonseca<br>
+        <em>&amp; Asoc.</em>
+      </h1>
+      <p class="hero-desc">
+        Especialistas en Derecho Laboral, Familia, Divorcios y Amparos de Salud. Más de 15 años acompañando personas y familias con compromiso en CABA y Provincia de Buenos Aires.
+      </p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn-primary">Consultanos hoy</a>
+        <a href="#servicios" class="btn-secondary">Ver servicios</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INFO STRIP ─────────────────────────────────────────── -->
+<div class="info-strip">
+  <a href="tel:+5491131401355" class="info-strip-item">
+    <div class="info-strip-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 3.18 2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    </div>
+    <div>
+      <div class="info-strip-label">Teléfono</div>
+      <div class="info-strip-value">+54 9 11 3140-1355</div>
+    </div>
+  </a>
+  <a href="https://wa.me/5491131401355" target="_blank" class="info-strip-item">
+    <div class="info-strip-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    </div>
+    <div>
+      <div class="info-strip-label">WhatsApp</div>
+      <div class="info-strip-value">Consulta rápida</div>
+    </div>
+  </a>
+  <a href="https://www.google.com.ar/maps/place/Estudio+Jur%C3%ADdico+Fonseca+Pablo+%26+Asoc." target="_blank" class="info-strip-item">
+    <div class="info-strip-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    </div>
+    <div>
+      <div class="info-strip-label">Oficina</div>
+      <div class="info-strip-value">Zona Sur — Bs. As.</div>
+    </div>
+  </a>
+  <div class="info-strip-item">
+    <div class="info-strip-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    </div>
+    <div>
+      <div class="info-strip-label">Atención</div>
+      <div class="info-strip-value">Lun–Vie 9:00–18:00</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SERVICIOS ──────────────────────────────────────────── -->
+<section id="servicios">
+  <div class="servicios-intro reveal">
+    <div>
+      <div class="section-label">Áreas de práctica</div>
+      <h2 class="section-title" style="color:var(--blanco);">Nuestros <em>servicios</em></h2>
+    </div>
+    <p>Asesoramiento jurídico personalizado en las áreas más relevantes. Cada caso recibe la atención que merece.</p>
+  </div>
+
+  <div class="servicios-list">
+    <div class="servicio-row reveal" style="transition-delay:.04s">
+      <div class="serv-num">01</div>
+      <div class="serv-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+      <div class="serv-content">
+        <div class="serv-name">Derecho Laboral</div>
+        <div class="serv-text">Despidos, liquidaciones, accidentes de trabajo, enfermedades profesionales y reclamos ante ANSES.</div>
+      </div>
+      <div class="serv-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+
+    <div class="servicio-row reveal" style="transition-delay:.08s">
+      <div class="serv-num">02</div>
+      <div class="serv-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div class="serv-content">
+        <div class="serv-name">Derecho de Familia</div>
+        <div class="serv-text">Alimentos, cuidado personal, régimen de comunicación, adopciones y sucesiones.</div>
+      </div>
+      <div class="serv-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+
+    <div class="servicio-row reveal" style="transition-delay:.12s">
+      <div class="serv-num">03</div>
+      <div class="serv-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3-3-3m3-3v11"/></svg></div>
+      <div class="serv-content">
+        <div class="serv-name">Divorcios</div>
+        <div class="serv-text">Divorcios unilaterales y de mutuo acuerdo, liquidación de bienes gananciales y separación de hecho.</div>
+      </div>
+      <div class="serv-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+
+    <div class="servicio-row reveal" style="transition-delay:.16s">
+      <div class="serv-num">04</div>
+      <div class="serv-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="serv-content">
+        <div class="serv-name">Daños y Perjuicios</div>
+        <div class="serv-text">Accidentes de tránsito, negligencias médicas, responsabilidad civil y reclamos por daños patrimoniales y morales.</div>
+      </div>
+      <div class="serv-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+
+    <div class="servicio-row reveal" style="transition-delay:.20s">
+      <div class="serv-num">05</div>
+      <div class="serv-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+      <div class="serv-content">
+        <div class="serv-name">Desalojos e Inmuebles</div>
+        <div class="serv-text">Juicios de desalojo, contratos de locación, compraventa y conflictos entre propietarios e inquilinos.</div>
+      </div>
+      <div class="serv-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+
+    <div class="servicio-row reveal" style="transition-delay:.24s">
+      <div class="serv-num">06</div>
+      <div class="serv-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <div class="serv-content">
+        <div class="serv-name">Amparos de Salud</div>
+        <div class="serv-text">Amparos para acceso a medicamentos, tratamientos y prestaciones médicas negadas por obras sociales o prepagas. Actuamos con urgencia.</div>
+      </div>
+      <div class="serv-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+
+    <div class="servicio-row reveal" style="transition-delay:.28s">
+      <div class="serv-num">07</div>
+      <div class="serv-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+      <div class="serv-content">
+        <div class="serv-name">Sucesiones y Amparos</div>
+        <div class="serv-text">Juicios sucesorios, declaratoria de herederos, partición de bienes y reclamos previsionales ante el Estado.</div>
+      </div>
+      <div class="serv-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONOCENOS ─────────────────────────────────────────── -->
+<section id="mision">
+  <div class="section-label reveal">El equipo</div>
+  <h2 class="section-title reveal" style="transition-delay:.05s"><em>Conocenos</em></h2>
+
+  <div class="mision-grid">
+    <div class="reveal" style="transition-delay:.1s">
+      <blockquote class="mision-quote">
+        "La justicia no es solo el resultado de un juicio — es el camino que recorremos junto a vos."
+      </blockquote>
+      <p class="mision-desc">
+        El Estudio Jurídico Fonseca &amp; Asoc. nació con la convicción de brindar asesoramiento legal accesible, honesto y de calidad. Garantizamos transparencia y cercanía con cada cliente.
+      </p>
+      <p class="mision-desc">
+        Nuestra experiencia en distintas ramas del derecho nos permite ofrecer una visión integral de cada situación, buscando siempre la solución más eficiente y justa. Litigamos en CABA y toda la Provincia de Buenos Aires.
+      </p>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-num" data-target="500">0</div>
+          <div class="stat-label">Casos resueltos</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-target="15">0</div>
+          <div class="stat-label">Años de trayectoria</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">98%</div>
+          <div class="stat-label">Satisfacción</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mision-visual-col reveal" style="transition-delay:.15s">
+      <div class="team-cards">
+        <div class="team-card">
+          <div class="team-photo">
+            <img src="foto_abogado.jpg" alt="Dr. Pablo Fonseca"
+                 onerror="this.parentElement.innerHTML='<div class=\'team-photo-placeholder\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'var(--dorado)\' stroke-width=\'1.5\' width=\'28\' height=\'28\'><path d=\'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2\'/><circle cx=\'12\' cy=\'7\' r=\'4\'/></svg></div>';">
+          </div>
+          <div>
+            <div class="team-name">Dr. Pablo Fonseca</div>
+            <div class="team-role">Abogado — Mat. Prof.</div>
+            <div class="team-bio">Especialista en Derecho Laboral, Familia y Amparos. Más de 15 años de trayectoria en CABA y PBA.</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">
+            <img src="foto_secretaria.jpg" alt="Secretaria del estudio"
+                 onerror="this.parentElement.innerHTML='<div class=\'team-photo-placeholder\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'var(--dorado)\' stroke-width=\'1.5\' width=\'28\' height=\'28\'><path d=\'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2\'/><circle cx=\'12\' cy=\'7\' r=\'4\'/></svg></div>';">
+          </div>
+          <div>
+            <div class="team-name">Secretaria del Estudio</div>
+            <div class="team-role">Administración &amp; Atención</div>
+            <div class="team-bio">Primera atención, seguimiento de expedientes y coordinación de turnos.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BANNER CONSULTA ───────────────────────────────────── -->
+<div class="banner-consulta">
+  <div class="banner-img"></div>
+  <div class="banner-content">
+    <div class="banner-eyebrow">Tu situación tiene solución</div>
+    <h3 class="banner-title">Cada caso merece<br><em>atención real.</em></h3>
+    <p class="banner-desc">No siempre es fácil saber a dónde ir frente a un problema legal. Estamos acá para escucharte, orientarte y acompañarte desde el primer momento.</p>
+    <div class="banner-btns">
+      <a href="#contacto" class="btn-primary">Escribinos hoy →</a>
+      <a href="https://wa.me/5491131401355" target="_blank" class="btn-wa-inline">
+        <svg viewBox="0 0 24 24" fill="#25D366" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp directo
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CLIENTES / RESEÑAS ────────────────────────────────── -->
+<section id="clientes">
+  <div class="resenas-header reveal">
+    <div>
+      <div class="section-label">Testimonios</div>
+      <h2 class="section-title">Lo que dicen nuestros <em>clientes</em></h2>
+    </div>
+    <div class="rating-block">
+      <div class="stars-row"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+      <div class="rating-num">5.0</div>
+      <div class="rating-label">Promedio de calificaciones</div>
+    </div>
+  </div>
+
+  <div class="carousel-wrapper">
+    <div class="carousel-track" id="carousel-track">
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">El estudio me acompañó en todo el proceso de divorcio. Profesionalismo y humanidad en cada consulta. Muy agradecida.</p><div class="resena-meta"><div class="resena-avatar">ML</div><div><div class="resena-name">María L.</div><div class="resena-date">Divorcio</div></div></div></div>
+
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">Me asesoraron en un juicio laboral complicado y obtuvimos un resultado excelente. Rápidos, claros y siempre disponibles.</p><div class="resena-meta"><div class="resena-avatar">CR</div><div><div class="resena-name">Carlos R.</div><div class="resena-date">Derecho Laboral</div></div></div></div>
+
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">Gestión de sucesión impecable. Explicaron cada paso con paciencia y resolvieron todo mucho más rápido de lo esperado.</p><div class="resena-meta"><div class="resena-avatar">AG</div><div><div class="resena-name">Ana G.</div><div class="resena-date">Sucesiones</div></div></div></div>
+
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">Excelente atención. Mi caso de accidente de tránsito fue resuelto favorablemente. Honestidad y dedicación en todo momento.</p><div class="resena-meta"><div class="resena-avatar">JM</div><div><div class="resena-name">Jorge M.</div><div class="resena-date">Daños y Perjuicios</div></div></div></div>
+
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">Nos ayudaron con el desalojo de nuestro local de manera rápida y sin complicaciones. El Dr. Fonseca transmite mucha confianza.</p><div class="resena-meta"><div class="resena-avatar">PV</div><div><div class="resena-name">Patricia V.</div><div class="resena-date">Desalojos</div></div></div></div>
+
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">El amparo para mi jubilación fue resuelto en tiempo récord. Nunca pensé que el Estado pudiera responder tan rápido.</p><div class="resena-meta"><div class="resena-avatar">RD</div><div><div class="resena-name">Roberto D.</div><div class="resena-date">Derecho Previsional</div></div></div></div>
+
+      <!-- Loop duplicado -->
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">El estudio me acompañó en todo el proceso de divorcio. Profesionalismo y humanidad en cada consulta. Muy agradecida.</p><div class="resena-meta"><div class="resena-avatar">ML</div><div><div class="resena-name">María L.</div><div class="resena-date">Divorcio</div></div></div></div>
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">Me asesoraron en un juicio laboral complicado y obtuvimos un resultado excelente. Rápidos, claros y siempre disponibles.</p><div class="resena-meta"><div class="resena-avatar">CR</div><div><div class="resena-name">Carlos R.</div><div class="resena-date">Derecho Laboral</div></div></div></div>
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">Gestión de sucesión impecable. Explicaron cada paso con paciencia y resolvieron todo mucho más rápido de lo esperado.</p><div class="resena-meta"><div class="resena-avatar">AG</div><div><div class="resena-name">Ana G.</div><div class="resena-date">Sucesiones</div></div></div></div>
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">Excelente atención. Mi caso de accidente de tránsito fue resuelto favorablemente. Honestidad y dedicación en todo momento.</p><div class="resena-meta"><div class="resena-avatar">JM</div><div><div class="resena-name">Jorge M.</div><div class="resena-date">Daños y Perjuicios</div></div></div></div>
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">Nos ayudaron con el desalojo de nuestro local de manera rápida y sin complicaciones. El Dr. Fonseca transmite mucha confianza.</p><div class="resena-meta"><div class="resena-avatar">PV</div><div><div class="resena-name">Patricia V.</div><div class="resena-date">Desalojos</div></div></div></div>
+      <div class="resena-card"><div class="resena-bigq">"</div><div class="resena-stars"><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div><div class="resena-star"></div></div><p class="resena-text">El amparo para mi jubilación fue resuelto en tiempo récord. Nunca pensé que el Estado pudiera responder tan rápido.</p><div class="resena-meta"><div class="resena-avatar">RD</div><div><div class="resena-name">Roberto D.</div><div class="resena-date">Derecho Previsional</div></div></div></div>
+    </div>
+    <div class="fade-left"></div>
+    <div class="fade-right"></div>
+  </div>
+</section>
+
+<!-- ─── OFICINAS ───────────────────────────────────────────── -->
+<section id="oficinas">
+  <div class="reveal">
+    <div class="section-label">Dónde estamos</div>
+    <h2 class="section-title">Nuestras <em>oficinas</em></h2>
+  </div>
+  <div class="oficinas-grid">
+    <div class="mapa-wrap reveal" style="transition-delay:.05s">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13138.4!2d-58.2685655!3d-34.7225155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a32f2fd379faab%3A0xbcd386527b9c6e6e!2sEstudio+Jur%C3%ADdico+Fonseca+Pablo+%26+Asoc.!5e0!3m2!1ses!2sar!4v1713000000000"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa oficina">
+      </iframe>
+    </div>
+    <div class="reveal" style="transition-delay:.1s">
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-card-label">Dirección</div>
+          <div class="info-card-value"><strong>Zona Sur — Buenos Aires</strong><br>Completá con la dirección exacta</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Teléfono</div>
+          <div class="info-card-value"><a href="tel:+5491131401355">+54 9 11 3140-1355</a></div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Horario</div>
+          <div class="info-card-value"><strong>Lunes a Viernes</strong><br>9:00 a 13:00 — 15:00 a 18:00 hs<br><strong>Sábados</strong><br>Con turno previo</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Zona de ejercicio</div>
+          <div class="info-card-value">CABA y Provincia de Buenos Aires</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Redes sociales</div>
+          <div class="info-card-value"><a href="https://www.instagram.com/fonsecaPablo_abogado" target="_blank">@fonsecaPablo_abogado</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACTO ───────────────────────────────────────────── -->
+<section id="contacto">
+  <div class="reveal">
+    <div class="section-label">Hablemos</div>
+    <h2 class="section-title">Consultanos sin <em>compromiso</em></h2>
+  </div>
+  <div class="contacto-grid">
+    <div class="reveal" style="transition-delay:.05s">
+      <div class="form-panel">
+        <div class="form-panel-title">Envianos tu consulta</div>
+        <div class="form-group">
+          <label class="form-label" for="nombre">Nombre completo</label>
+          <input class="form-input" type="text" id="nombre" placeholder="Tu nombre y apellido" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="area">Área de consulta</label>
+          <select class="form-select" id="area">
+            <option value="">Seleccioná un área</option>
+            <option>Derecho Laboral</option>
+            <option>Derecho de Familia</option>
+            <option>Divorcios</option>
+            <option>Daños y Perjuicios</option>
+            <option>Desalojos e Inmuebles</option>
+            <option>Sucesiones</option>
+            <option>Amparos de Salud</option>
+            <option>Amparos y Previsional</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="consulta">Tu consulta</label>
+          <textarea class="form-textarea" id="consulta" placeholder="Contanos brevemente tu situación..."></textarea>
+        </div>
+        <button class="btn-wa-submit" onclick="enviarWhatsApp()">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enviar por WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <div class="contacto-lateral reveal" style="transition-delay:.1s">
+      <div>
+        <div class="contacto-lateral-title">Contacto directo</div>
+        <p class="contacto-lateral-sub">Respondemos a la brevedad por cualquiera de estos medios.</p>
+      </div>
+      <div class="contact-links">
+        <a href="tel:+5491131401355" class="contact-link-item">
+          <div class="contact-link-icon" style="background:rgba(13,31,60,0.07);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 3.18 2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div class="contact-link-text"><strong>Llamar al estudio</strong><span>+54 9 11 3140-1355</span></div>
+        </a>
+        <a href="https://wa.me/5491131401355" target="_blank" class="contact-link-item">
+          <div class="contact-link-icon" style="background:rgba(37,211,102,0.1);">
+            <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div class="contact-link-text"><strong>WhatsApp</strong><span>Consulta rápida</span></div>
+        </a>
+        <a href="https://www.instagram.com/fonsecaPablo_abogado" target="_blank" class="contact-link-item">
+          <div class="contact-link-icon" style="background:rgba(193,53,132,0.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#cc2366" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <div class="contact-link-text"><strong>Instagram</strong><span>@fonsecaPablo_abogado</span></div>
+        </a>
+        <a href="https://www.google.com.ar/maps/place/Estudio+Jur%C3%ADdico+Fonseca+Pablo+%26+Asoc." target="_blank" class="contact-link-item">
+          <div class="contact-link-icon" style="background:rgba(13,31,60,0.07);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="contact-link-text"><strong>Ver en Google Maps</strong><span>Zona Sur — Buenos Aires</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────── -->
+<footer>
+  <a href="#inicio" class="nav-logo" style="text-decoration:none;">
+    <img src="logo.png" alt="Logo" class="logo-img" style="height:44px;"
+         onerror="this.style.display='none';">
+    <div class="logo-text">
+      <div class="logo-name" style="font-size:0.9rem;">Fonseca <span>&</span> Asoc.</div>
+      <div class="logo-sub">Estudio Jurídico</div>
+    </div>
+  </a>
+  <p class="footer-copy">© 2025 <span>Fonseca &amp; Asoc.</span> — Todos los derechos reservados</p>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/fonsecaPablo_abogado" target="_blank" class="footer-social-btn" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="https://wa.me/5491131401355" target="_blank" class="footer-social-btn" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a href="tel:+5491131401355" class="footer-social-btn" aria-label="Llamar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 3.18 2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<!-- ─── BARRA INFERIOR MOBILE ─────────────────────────────── -->
+<div class="mobile-quick" role="navigation" aria-label="Acciones rápidas">
+  <a href="tel:+5491131401355" class="mq-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 3.18 2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    Llamar
+  </a>
+  <a href="https://wa.me/5491131401355" target="_blank" class="mq-btn wa">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
+  <a href="#contacto" class="mq-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Consultar
+  </a>
+</div>
+
+<!-- ─── JS ─────────────────────────────────────────────────── -->
+<script>
+// Scroll nav
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').classList.toggle('scrolled', scrollY > 10);
+  const pos = scrollY + 80;
+  document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
+    const el = document.querySelector(a.getAttribute('href'));
+    if (!el) return;
+    a.classList.toggle('active', pos >= el.offsetTop && pos < el.offsetTop + el.offsetHeight);
+  });
+}, { passive: true });
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('nav-links').classList.toggle('open');
+  document.getElementById('nav-toggle').classList.toggle('open');
+}
+document.querySelectorAll('#nav-links a').forEach(a =>
+  a.addEventListener('click', () => {
+    document.getElementById('nav-links').classList.remove('open');
+    document.getElementById('nav-toggle').classList.remove('open');
+  })
+);
+
+// Reveal on scroll
+const revObs = new IntersectionObserver(entries =>
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.06 }
+);
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+// Counters
+function animateCounter(el) {
+  const target = +el.getAttribute('data-target');
+  if (!target) return;
+  const step = target / (1800 / 16);
+  let cur = 0;
+  const t = setInterval(() => {
+    cur += step;
+    if (cur >= target) { el.textContent = target + '+'; clearInterval(t); }
+    else el.textContent = Math.floor(cur) + '+';
+  }, 16);
+}
+const cntObs = new IntersectionObserver(entries =>
+  entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); cntObs.unobserve(e.target); } }),
+  { threshold: 0.5 }
+);
+document.querySelectorAll('[data-target]').forEach(el => cntObs.observe(el));
+
+// WhatsApp form
+function enviarWhatsApp() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const area   = document.getElementById('area').value;
+  const consulta = document.getElementById('consulta').value.trim();
+  if (!nombre || !consulta) { alert('Por favor completá tu nombre y tu consulta antes de enviar.'); return; }
+  const msg = `Hola, soy ${nombre}.${area ? '\nÁrea: ' + area : ''}\n\nLes escribo desde su sitio web:\n\n${consulta}`;
+  window.open('https://wa.me/5491131401355?text=' + encodeURIComponent(msg), '_blank');
+}
+
+// Touch carousel
+(function() {
+  const track = document.getElementById('carousel-track');
+  if (!track) return;
+  let startX = 0, isDragging = false, startLeft = 0;
+
+  track.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+    track.style.animationPlayState = 'paused';
+  }, { passive: true });
+
+  track.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - startX;
+    // Just pause; auto-resume on end
+  }, { passive: true });
+
+  track.addEventListener('touchend', () => {
+    isDragging = false;
+    setTimeout(() => track.style.animationPlayState = 'running', 1500);
+  });
+})();
+</script>
+</body>
+</html>
